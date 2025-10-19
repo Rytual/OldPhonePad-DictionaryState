@@ -9,7 +9,8 @@ namespace OldPhonePad.DictionaryState
     /// </summary>
     public static class OldPhonePadDecoder
     {
-        // Keypad mapping - just like the good old days of flip phones
+        // Keypad mapping - had to look up the layout from the challenge PDF
+        // Dictionary seemed like the simplest way to handle this
         private static readonly Dictionary<char, string> KeypadMap = new()
         {
             { '1', "&'(" },
@@ -132,8 +133,8 @@ namespace OldPhonePad.DictionaryState
                 return '\0';
             }
 
-            // Cycle through characters - if you press too many times, it wraps around
-            // Just like when you'd overshoot the letter you wanted!
+            // Took a few tries to get the cycling right - modulo does the trick
+            // If you press 2 four times (A, B, C, A again), index wraps back around
             int index = (presses - 1) % chars.Length;
             return char.ToUpper(chars[index]);
         }

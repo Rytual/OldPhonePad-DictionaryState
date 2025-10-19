@@ -13,7 +13,7 @@ namespace OldPhonePad.DictionaryState.Tests
         #region Basic Functionality Tests
 
         [Fact]
-        public void ShouldDecodeSimpleE()
+        public void DecodesSimpleEJustFine()
         {
             // Just like typing 'E' on a Nokia 3310
             var result = OldPhonePadDecoder.OldPhonePad("33#");
@@ -21,7 +21,7 @@ namespace OldPhonePad.DictionaryState.Tests
         }
 
         [Fact]
-        public void ShouldDecodeBWithBackspace()
+        public void DecodesBWithBackspace()
         {
             // Type "CA" then backspace the A, leaving just B
             var result = OldPhonePadDecoder.OldPhonePad("227*#");
@@ -29,7 +29,7 @@ namespace OldPhonePad.DictionaryState.Tests
         }
 
         [Fact]
-        public void ShouldDecodeHelloLikeIts1999()
+        public void DecodesHelloNoProblem()
         {
             // The classic HELLO - brings back memories of SMS on flip phones
             var result = OldPhonePadDecoder.OldPhonePad("4433555 555666#");
@@ -37,7 +37,7 @@ namespace OldPhonePad.DictionaryState.Tests
         }
 
         [Fact]
-        public void ShouldDecodeTURING()
+        public void DecodesTuringCorrectly()
         {
             // The mystery example: "8 88777444666*664#"
             // Let's decode: 8=T, space, 88=U, 777=R, 444=I, 666=O (but then *664)
@@ -143,6 +143,24 @@ namespace OldPhonePad.DictionaryState.Tests
             Assert.Equal("W", result);
         }
 
+        [Fact]
+        public void HandlesCrazyCycling()
+        {
+            // Pressing 2 way too many times - should cycle back to A
+            // 2222 = 4 presses = A (cycles once: A->B->C->A)
+            var result = OldPhonePadDecoder.OldPhonePad("2222#");
+            Assert.Equal("A", result);
+        }
+
+        [Fact]
+        public void CyclingWithSpaceWorks()
+        {
+            // Make sure cycling and spaces play nice together
+            // 2222 = A, space, 22 = B
+            var result = OldPhonePadDecoder.OldPhonePad("2222 22#");
+            Assert.Equal("AB", result);
+        }
+
         #endregion
 
         #region Space (Pause) Tests
@@ -186,9 +204,10 @@ namespace OldPhonePad.DictionaryState.Tests
         [Fact]
         public void ShouldBackspaceMiddleOfWord()
         {
-            // Type ABC then backspace, then add D -> ABD
+            // Type CD then backspace, then add D again
+            // 222=C, 3=D, backspace removes D, 3=D again
             var result = OldPhonePadDecoder.OldPhonePad("2223*3#");
-            Assert.Equal("AAD", result);
+            Assert.Equal("CD", result);
         }
 
         [Fact]
@@ -202,9 +221,10 @@ namespace OldPhonePad.DictionaryState.Tests
         [Fact]
         public void ShouldBackspaceAndContinue()
         {
-            // Complex: type, backspace, continue
+            // Type CD, backspace D, then add O
+            // 222=C, 3=D, backspace removes D, 666=O
             var result = OldPhonePadDecoder.OldPhonePad("2223*666#");
-            Assert.Equal("AAO", result);
+            Assert.Equal("CO", result);
         }
 
         #endregion
@@ -297,8 +317,9 @@ namespace OldPhonePad.DictionaryState.Tests
         public void ShouldHandleLongInput()
         {
             // A really long message - like texting an essay in 2003
+            // 44=H, 33=E, 555=L, space, 555=L, 666=O, space, 999=Y, 666=O, 777=R, 555=L, 3=D
             var result = OldPhonePadDecoder.OldPhonePad("4433555 555666 9996667775553#");
-            Assert.Equal("HELLOWORLD", result);
+            Assert.Equal("HELLOYORLD", result);
         }
 
         [Fact]
