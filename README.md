@@ -56,7 +56,7 @@ This approach uses a simple dictionary mapping and state variables to track:
 - Manual tracking of current key and press count
 - Not as elegant as some functional approaches
 
-Perfect for when you need clarity over cleverness. Like explaining code to a teammate at 2 AM before a deployment.
+Good for when you need clarity over cleverness. Like explaining code to a teammate at 2 AM before a deployment.
 
 ## Getting Started
 
@@ -93,20 +93,20 @@ Console.WriteLine(result); // Output: HELLO
 
 ## Test Coverage
 
-This project includes 40+ comprehensive unit tests covering:
+This project includes 40+ unit tests covering:
 
-- ✅ All provided examples
-- ✅ Edge cases (empty input, multiple backspaces, excessive spaces)
-- ✅ Single character decoding for all keys
-- ✅ Cycling behavior (pressing a key more times than it has letters)
-- ✅ Pause handling (spaces between same-key presses)
-- ✅ Backspace operations (including backspacing empty strings)
-- ✅ Special keys (symbols on key 1, space on key 0)
-- ✅ Complex real-world scenarios (SOS, HELLO WORLD, etc.)
-- ✅ Error handling (null input, missing send character)
-- ✅ Stress tests (long inputs, many backspaces)
+- All provided examples
+- Edge cases (empty input, multiple backspaces, excessive spaces)
+- Single character decoding for all keys
+- Cycling behavior (pressing a key more times than it has letters)
+- Pause handling (spaces between same-key presses)
+- Backspace operations (including backspacing empty strings)
+- Special keys (symbols on key 1, space on key 0)
+- Complex real-world scenarios - SOS, HELLO WORLD and stuff like that
+- Error handling (null input, missing send character)
+- Stress tests with long inputs and many backspaces
 
-Run the tests and see them pass like watching a flip phone successfully send an SMS.
+Run the tests and watch them pass. Feels like successfully sending an SMS on a flip phone.
 
 ## Project Structure
 
@@ -116,7 +116,7 @@ OldPhonePad-DictionaryState/
 │   ├── OldPhonePad.cs                    # Main decoder implementation
 │   └── OldPhonePad.DictionaryState.csproj
 ├── tests/
-│   ├── OldPhonePadTests.cs              # Comprehensive test suite
+│   ├── OldPhonePadTests.cs              # Test suite
 │   └── OldPhonePad.DictionaryState.Tests.csproj
 ├── .github/
 │   └── workflows/
@@ -142,24 +142,24 @@ The character lookup uses modulo arithmetic to handle cycling when you press too
 
 ## Extensions & Ideas
 
-Want to take this further? Here are some ideas I've been pondering during my morning coffee:
+Want to take this further? Some ideas:
 
 - Add support for punctuation and numbers
-- Create a console demo app where you can type in real-time
-- Implement T9 predictive text (dictionary-based suggestions)
+- Create a console demo where you can type in real-time
+- Implement T9 predictive text with dictionary lookups
 - Add a web API wrapper
 - Create a reverse encoder (text → key presses)
-- Build a GUI that looks like an old Nokia phone (peak nostalgia!)
+- Build a GUI that looks like an old Nokia phone (peak nostalgia)
 
 ## Alternatives
 
-If you enjoyed this approach, check out my other implementations:
+Check out my other implementations of the same problem:
 - **OldPhonePad-FSM**: Uses a finite state machine for more formal state transitions
 - **OldPhonePad-Grouping**: Groups consecutive digits before processing
 - **OldPhonePad-OOP**: Object-oriented design with separate Keypad and Decoder classes
 - **OldPhonePad-RegexStack**: Regex preprocessing with stack-based evaluation
 
-Each one offers different trade-offs in terms of readability, performance, and extensibility.
+Each one has different trade-offs in readability, performance and extensibility.
 
 ## Contributing
 
@@ -169,7 +169,7 @@ Please follow standard C# conventions and include tests for any new functionalit
 
 ## License
 
-MIT License - see LICENSE file for details. Use it, modify it, share it. Just maybe give a nod to the glory days of T9 texting.
+MIT License - see LICENSE file for details. Use it, modify it, share it. Maybe give a nod to the glory days of T9 texting.
 
 ## Acknowledgments
 
@@ -179,6 +179,6 @@ MIT License - see LICENSE file for details. Use it, modify it, share it. Just ma
 
 ---
 
-Built with nostalgia and a mild case of RSI from testing on an actual old phone. Remember: in the early 2000s, we were basically training for software engineering by mastering T9.
+Built with nostalgia and a mild case of RSI from testing on an actual old phone. In the early 2000s we were basically training for software engineering by mastering T9.
 
 *Last updated: October 2025*
